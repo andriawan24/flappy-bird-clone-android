@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flappy Bird Clone</string>
+    <string name="description_pipe_down">Image of pipe appears on the top of the screen to bottom</string>
 </resources>
