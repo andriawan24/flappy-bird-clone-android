@@ -1,5 +1,9 @@
 package id.andriawan24.flappybirdclone.utils
 
-import androidx.compose.ui.unit.Dp
+import android.util.Log
 
-typealias Pipe = Pair<Dp, Dp>
+object LogHelper {
+    fun log(tag: String = "FlappyBirdClone", message: String) {
+        Log.d(tag, message)
+    }
+}
