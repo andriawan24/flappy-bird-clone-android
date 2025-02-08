@@ -85,7 +85,7 @@ fun PipePillar(modifier: Modifier = Modifier, height: Dp = 120.dp) {
 
 @Preview(showBackground = true, widthDp = 1000)
 @Composable
-private fun PipePreview() {
+fun PipePreview() {
     FlappyBirdCloneTheme {
         Row(modifier = Modifier.wrapContentWidth()) {
             Spacer(modifier = Modifier.width(60.dp))
