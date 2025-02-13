@@ -1,6 +1,7 @@
 package id.andriawan24.flappybirdclone
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
@@ -14,10 +15,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import id.andriawan24.flappybirdclone.ui.presentation.MainScreen
 import id.andriawan24.flappybirdclone.ui.presentation.MainViewModel
 import id.andriawan24.flappybirdclone.ui.state.GameEvent
+import id.andriawan24.flappybirdclone.ui.state.GameStatus
 import id.andriawan24.flappybirdclone.ui.theme.FlappyBirdCloneTheme
 import id.andriawan24.flappybirdclone.utils.findRootView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+
+const val AutoTickDuration = 50L
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +36,16 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val darkTheme by remember { mutableStateOf(false) }
+
             FlappyBirdCloneTheme(darkTheme = darkTheme) {
                 val mainViewModel: MainViewModel = viewModel()
 
                 LaunchedEffect(true) {
                     while (isActive) {
                         delay(AutoTickDuration)
-                        mainViewModel.onEvent(GameEvent.AutoTick)
+                        if (mainViewModel.gameState.value.gameStatus != GameStatus.Waiting) {
+                            mainViewModel.onEvent(GameEvent.AutoTick)
+                        }
                     }
                 }
 
@@ -47,5 +54,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-const val AutoTickDuration = 50L

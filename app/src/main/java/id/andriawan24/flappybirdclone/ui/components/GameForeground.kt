@@ -25,9 +25,7 @@ import id.andriawan24.flappybirdclone.ui.state.TempRoadWidthOffset
 import id.andriawan24.flappybirdclone.ui.theme.FlappyBirdCloneTheme
 
 @Composable
-fun GameForeground(modifier: Modifier = Modifier, state: GameState) {
-    val viewModel: MainViewModel = viewModel()
-
+fun GameForeground(modifier: Modifier = Modifier, state: GameState, mainViewModel: MainViewModel) {
     Column(modifier = modifier) {
         HorizontalDivider(
             color = Color(0xFF523847),
@@ -65,7 +63,7 @@ fun GameForeground(modifier: Modifier = Modifier, state: GameState) {
         if (state.playZoneSize.width > 0) {
             state.roadStates.forEachIndexed { index, roadState ->
                 if (roadState.offset <= -TempRoadWidthOffset) {
-                    viewModel.onEvent(GameEvent.RoadExit, roadIndex = index)
+                    mainViewModel.onEvent(GameEvent.RoadExit, roadIndex = index)
                 }
             }
         }
